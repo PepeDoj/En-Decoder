@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,24 @@ namespace En_Decoder
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string librarypath = @"C:\Users\roman\source\repos\En-Decoder\library.txt";
+        
+
+        public DateTime date1 = new DateTime();
         public MainWindow()
         {
             InitializeComponent();
+
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Chat.Text = Chat.Text + "TEST " + DateTime.Now.ToShortTimeString() + ": " + Message.Text;
+
+            Chat.Text += "\r\n";
+
+            Chat.Text = File.ReadAllText(librarypath);
         }
     }
 }
