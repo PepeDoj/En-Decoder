@@ -22,7 +22,9 @@ namespace En_Decoder
     public partial class MainWindow : Window
     {
         public string librarypath = @"C:\Users\roman\source\repos\En-Decoder\library.txt";
-        
+        public string userspath = @"C:\Users\roman\source\repos\En-Decoder\users\users.txt";
+
+        Random rnd = new Random();
 
         public DateTime date1 = new DateTime();
         public MainWindow()
@@ -38,7 +40,31 @@ namespace En_Decoder
 
             Chat.Text += "\r\n";
 
-            Chat.Text = File.ReadAllText(librarypath);
+            Message.Text = null;
+
+            //Chat.Text = File.ReadAllText(librarypath);
+        }
+
+        private void register_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            if (pass.Password == passproof.Password)
+            {
+                File.AppendAllTextAsync(userspath, nickname.Text + " " + pass.Password + " " + rnd.Next(1000000, 9999999) + "\n");
+
+                nickname.Text = null;
+                pass.Password = null;
+                passproof.Password = null;
+            }
+
+            else
+            {
+                pass.Password = null;
+                passproof.Password= null;
+            }
+
+            //Chat.Text = File.ReadAllLines(userspath);
         }
     }
 }

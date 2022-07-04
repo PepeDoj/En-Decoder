@@ -11,6 +11,10 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="774,449,0,0" VerticalAlignment="Top" Height="38" Width="50" Click="Button_Click" RenderTransformOrigin="0.48,0.554"/>
         <TextBox x:Name="Chat" HorizontalAlignment="Left" Margin="28,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="741" Height="390" FontSize="20" AcceptsTab="True" AcceptsReturn="True"/>
         <TextBox x:Name="Message" HorizontalAlignment="Left" Margin="28,423,0,28" TextWrapping="Wrap" Width="741" FontSize="20" />
+        <TextBox x:Name="nickname" HorizontalAlignment="Left" Margin="799,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox x:Name="pass" HorizontalAlignment="Left" Margin="799,76,0,0" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox x:Name="passproof" HorizontalAlignment="Left" Margin="799,127,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="register" Content="Button" HorizontalAlignment="Left" Margin="799,184,0,0" VerticalAlignment="Top" Width="120" Click="register_Click"/>
 
     </Grid>
 </Window>
