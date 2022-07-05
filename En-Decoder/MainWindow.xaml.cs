@@ -21,16 +21,36 @@ namespace En_Decoder
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string librarypath = @"C:\Users\roman\source\repos\En-Decoder\library.txt";
-        public string userspath = @"C:\Users\roman\source\repos\En-Decoder\users\users.txt";
+        static string librarypath = @"C:\Users\roman\source\repos\En-Decoder\library.txt";
+        static string userspath = @"C:\Users\roman\source\repos\En-Decoder\users\users.txt";
+        static string codelibrary = @"C:\Users\roman\source\repos\En-Decoder\codelibrary\";
+        static string codelibrarybuf;
+
+        public string code = null;
+
+        static string symbols = File.ReadAllText(librarypath);
 
         Random rnd = new Random();
 
         public DateTime date1 = new DateTime();
+
         public MainWindow()
         {
             InitializeComponent();
 
+            codelibrarybuf = codelibrary + rnd.Next(1000000, 9999999) + ".txt";
+
+            for (int i = 0; i < symbols.Length; i++) 
+            {
+                for (int j = 0; j < 32; j++)
+                {
+                    code = code + symbols[rnd.Next(0, symbols.Length)];
+                }
+
+                File.AppendAllText(codelibrarybuf, symbols[i].ToString() + " - " + code + "\n");
+
+                code = null;
+            }
             
         }
 
@@ -47,8 +67,6 @@ namespace En_Decoder
 
         private void register_Click(object sender, RoutedEventArgs e)
         {
-            
-
             if (pass.Password == passproof.Password)
             {
                 File.AppendAllTextAsync(userspath, nickname.Text + " " + pass.Password + " " + rnd.Next(1000000, 9999999) + "\n");
@@ -63,8 +81,6 @@ namespace En_Decoder
                 pass.Password = null;
                 passproof.Password= null;
             }
-
-            //Chat.Text = File.ReadAllLines(userspath);
         }
     }
 }
