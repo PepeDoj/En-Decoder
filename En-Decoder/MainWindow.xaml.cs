@@ -21,38 +21,69 @@ namespace En_Decoder
     /// </summary>
     public partial class MainWindow : Window
     {
+        const int LenghtCodeLibrary = 8;      
+
         static string librarypath = @"C:\Users\roman\source\repos\En-Decoder\library.txt";
         static string userspath = @"C:\Users\roman\source\repos\En-Decoder\users\users.txt";
         static string codelibrary = @"C:\Users\roman\source\repos\En-Decoder\codelibrary\";
         static string codelibrarybuf;
 
         public string code = null;
+        public string codebuf = null;
 
         static string symbols = File.ReadAllText(librarypath);
 
         Random rnd = new Random();
 
-        public DateTime date1 = new DateTime();
+        public DateTime date = new DateTime();
+
+        
 
         public MainWindow()
         {
             InitializeComponent();
 
+            string[] lines = File.ReadAllLines(codelibrarybuf);
+
             codelibrarybuf = codelibrary + rnd.Next(1000000, 9999999) + ".txt";
 
-            for (int i = 0; i < symbols.Length; i++) 
-            {
-                for (int j = 0; j < 32; j++)
+            for (int i = 0; i < symbols.Length; i++)
+            { 
+                for (int j = 0; j < LenghtCodeLibrary; j++)
                 {
                     code = code + symbols[rnd.Next(0, symbols.Length)];
+
+                    if(code == codebuf)
+                    {
+                        code = null;
+                        j--;
+                    }
+
+                    else
+                    {
+                        File.AppendAllText(codelibrarybuf, symbols[i].ToString() + " - " + code + "\n");
+
+                        code = null;
+                    }
                 }
 
-                File.AppendAllText(codelibrarybuf, symbols[i].ToString() + " - " + code + "\n");
-
-                code = null;
+                
+                
+                
             }
+
             
-        }
+
+            foreach (string s in lines)
+            {
+                if (s[4
+                    ] == '1')
+                {
+                    Chat.Text = s;
+                }
+            }
+
+    }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -61,8 +92,6 @@ namespace En_Decoder
             Chat.Text += "\r\n";
 
             Message.Text = null;
-
-            //Chat.Text = File.ReadAllText(librarypath);
         }
 
         private void register_Click(object sender, RoutedEventArgs e)
@@ -74,6 +103,8 @@ namespace En_Decoder
                 nickname.Text = null;
                 pass.Password = null;
                 passproof.Password = null;
+
+                File.OpenRead(librarypath);
             }
 
             else
