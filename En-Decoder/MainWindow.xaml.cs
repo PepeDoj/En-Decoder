@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestDB;
 
 namespace En_Decoder
 {
@@ -21,31 +22,44 @@ namespace En_Decoder
     /// </summary>
     public partial class MainWindow : Window
     {
-        const int LenghtCodeLibrary = 8;      
+        string UserID = null;
+
+        Random random = new Random();
+
+        public DateTime date = new DateTime();
+
+        int LevelID1 = 16;
+        int LevelID2 = 8;
+        int LevelID3 = 8;
+        int LevelID4 = 8;
+
+
+        /*const int LenghtCodeLibrary = 8;      
 
         static string librarypath = @"C:\Users\roman\source\repos\En-Decoder\library.txt";
         static string userspath = @"C:\Users\roman\source\repos\En-Decoder\users\users.txt";
         static string codelibrary = @"C:\Users\roman\source\repos\En-Decoder\codelibrary\";
-        static string codelibrarybuf;
+        static string codelibrarybuf = null;
 
-        public string code = null;
-        public string codebuf = null;
+        public string code = "";
+        public string codebuf = "";
 
-        static string symbols = File.ReadAllText(librarypath);
+        static string symbols = File.ReadAllText(librarypath);*/
 
-        Random rnd = new Random();
 
-        public DateTime date = new DateTime();
 
-        
 
         public MainWindow()
         {
             InitializeComponent();
 
-            string[] lines = File.ReadAllLines(codelibrarybuf);
 
-            codelibrarybuf = codelibrary + rnd.Next(1000000, 9999999) + ".txt";
+
+
+
+            /*codelibrarybuf = codelibrary + rnd.Next(1000000, 9999999) + ".txt"; 
+
+            string[] lines = File.ReadAllLines(codelibrarybuf);
 
             for (int i = 0; i < symbols.Length; i++)
             { 
@@ -55,63 +69,143 @@ namespace En_Decoder
 
                     if(code == codebuf)
                     {
-                        code = null;
+                        code = "";
                         j--;
                     }
 
-                    else
+                    foreach (string s in lines)
                     {
-                        File.AppendAllText(codelibrarybuf, symbols[i].ToString() + " - " + code + "\n");
+                        for (int k = 0; k < LenghtCodeLibrary; k++)
+                        {
+                            codebuf = codebuf + s[k];
+                        }
 
-                        code = null;
+                        if (code == codebuf)
+                        {
+                            Chat.Text = Chat.Text + "true";
+
+                            code = "";
+                            codebuf = "";
+
+                            j--;
+
+
+                        }
+
+                        else
+                        {
+                            File.AppendAllText(codelibrarybuf, symbols[i].ToString() + " - " + code + "\n");
+
+                            code = "";
+                            codebuf = "";
+                        }
+
+
                     }
-                }
+                }    
+            }*/
 
-                
-                
-                
-            }
 
-            
-
-            foreach (string s in lines)
+            /*private void Button_Click(object sender, RoutedEventArgs e)
             {
-                if (s[4
-                    ] == '1')
-                {
-                    Chat.Text = s;
-                }
-            }
+                Chat.Text = Chat.Text + "TEST " + DateTime.Now.ToShortTimeString() + ": " + Message.Text;
 
-    }
+                Chat.Text += "\r\n";
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Chat.Text = Chat.Text + "TEST " + DateTime.Now.ToShortTimeString() + ": " + Message.Text;
+                Message.Text = null;
+            }*/
 
-            Chat.Text += "\r\n";
 
-            Message.Text = null;
         }
 
-        private void register_Click(object sender, RoutedEventArgs e)
+
+
+        private void Enter_Click(object sender, RoutedEventArgs e)
         {
-            if (pass.Password == passproof.Password)
+           /* using (var db = new ApplicationContext())
             {
-                File.AppendAllTextAsync(userspath, nickname.Text + " " + pass.Password + " " + rnd.Next(1000000, 9999999) + "\n");
+                var users = db.Users.ToList();
 
-                nickname.Text = null;
-                pass.Password = null;
-                passproof.Password = null;
-
-                File.OpenRead(librarypath);
+                foreach (Users u in users)
+                {
+                    Chat.Text = Chat.Text + u.ID + " " + u.Nickname + " " + u.Login + " " + u.Password + "\n";
+                }
+            }*/
+        }
+        private void SignIn_Click(object sender, RoutedEventArgs e)
+        {
+            if (PasswordSignIn == PasswordProofSignIn)
+            {
+                PasswordSignIn.Password = null;
+                PasswordProofSignIn.Password = null;
             }
 
             else
             {
-                pass.Password = null;
-                passproof.Password= null;
+                using (var db = new ApplicationContext())
+                {
+                    for (int i = 0; i < LevelID1; i++)
+                    {
+                        UserID = UserID + random.Next(0, 10);
+                    }
+
+                    UserID = UserID + "-";
+
+                    for (int i = 0; i < LevelID2; i++)
+                    {
+                        UserID = UserID + random.Next(0, 10);
+                    }
+
+                    UserID = UserID + "-";
+
+                    for (int i = 0; i < LevelID3; i++)
+                    {
+                        UserID = UserID + random.Next(0, 10);
+                    }
+
+                    UserID = UserID + "-";
+
+                    for (int i = 0; i < LevelID4; i++)
+                    {
+                        UserID = UserID + random.Next(0, 10);
+                    }
+
+                    // создаем два объекта User
+                    Users user = new Users { ID = UserID, Nickname = NicknameSignIn.Text, Login = LoginSignIn.Text, Password = PasswordSignIn.Password };
+
+                    // добавляем их в бд
+                    db.Users.Add(user);
+                    db.SaveChanges();
+
+                    PasswordSignIn.Password = null;
+                    PasswordProofSignIn.Password = null;
+                    LoginSignIn.Text = null;
+                    NicknameSignIn.Text = null;
+                }
+
             }
         }
+
+        private void SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var users = db.Users.ToList();
+
+                foreach (Users u in users)
+                {
+                    if(LoginSignUp.Text == u.Login && PasswordSignUp.Password == u.Password)
+                    {
+                        Chat.Text = "TRUE";
+                    }
+
+                    else
+                    {
+                        Chat.Text = "FALSE";
+                    }
+
+                }
+            }
+        }      
     }
 }
