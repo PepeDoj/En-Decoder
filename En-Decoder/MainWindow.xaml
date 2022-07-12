@@ -8,17 +8,22 @@
         
         Title="MainWindow" Height="550" Width="1000">
     <Grid>
+        <StackPanel Margin="0,0,875,0">
+            <Button x:Name="Open" Content="Вход" Margin="0,58,0,15" Click="Open_Click"/>
+            <Button Content="Button" Margin="0,0,0,15"/>
+            <Button Content="Button"/>
+        </StackPanel>
         <Button x:Name="Enter" Content="Button" HorizontalAlignment="Left" Margin="774,449,0,0" VerticalAlignment="Top" Height="38" Width="50" RenderTransformOrigin="0.48,0.554" Click="Enter_Click"/>
-        <TextBox x:Name="Chat" HorizontalAlignment="Left" Margin="28,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="741" Height="390" FontSize="20" AcceptsTab="True" AcceptsReturn="True"/>
-        <TextBox x:Name="Message" HorizontalAlignment="Left" Margin="28,423,0,28" TextWrapping="Wrap" Width="741" FontSize="20" />
+        <TextBox x:Name="Chat" HorizontalAlignment="Left" Margin="314,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="455" Height="390" FontSize="20" AcceptsTab="True" AcceptsReturn="True"/>
+        <TextBox x:Name="Message" HorizontalAlignment="Left" Margin="314,423,0,28" TextWrapping="Wrap" Width="455" FontSize="20" />
         <TextBox x:Name="NicknameSignIn" HorizontalAlignment="Left" Margin="799,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <PasswordBox x:Name="PasswordSignIn" HorizontalAlignment="Left" Margin="799,134,0,0" VerticalAlignment="Top" Width="120"/>
         <PasswordBox x:Name="PasswordProofSignIn" HorizontalAlignment="Left" Margin="799,173,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="SignIn" Content="Button" HorizontalAlignment="Left" Margin="799,223,0,0" VerticalAlignment="Top" Width="120" Click="SignIn_Click" />
         <TextBox x:Name="LoginSignIn" HorizontalAlignment="Left" Margin="799,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="LoginSignUp" HorizontalAlignment="Left" Margin="799,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="SignUp" Content="Button" HorizontalAlignment="Left" Margin="799,377,0,0" VerticalAlignment="Top" Width="120" Click="SignUp_Click"/>
-        <PasswordBox x:Name="PasswordSignUp" HorizontalAlignment="Left" Margin="799,334,0,0" VerticalAlignment="Top" Width="120"/>
+        
+        <Frame x:Name="Frame" Content="" Margin="125,0,0,0" NavigationUIVisibility="Hidden"/>
+
 
     </Grid>
 </Window>

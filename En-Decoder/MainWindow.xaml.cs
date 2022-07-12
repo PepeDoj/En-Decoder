@@ -186,26 +186,11 @@ namespace En_Decoder
             }
         }
 
-        private void SignUp_Click(object sender, RoutedEventArgs e)
+        
+
+        private void Open_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new ApplicationContext())
-            {
-                var users = db.Users.ToList();
-
-                foreach (Users u in users)
-                {
-                    if(LoginSignUp.Text == u.Login && PasswordSignUp.Password == u.Password)
-                    {
-                        Chat.Text = "TRUE";
-                    }
-
-                    else
-                    {
-                        Chat.Text = "FALSE";
-                    }
-
-                }
-            }
-        }      
+            Frame.Content = new SignInPage();
+        }
     }
 }
