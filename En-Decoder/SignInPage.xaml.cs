@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TestDB;
+
 
 namespace En_Decoder
 {
@@ -21,31 +21,72 @@ namespace En_Decoder
     /// </summary>
     public partial class SignInPage : Page
     {
+        string UserID = null;
+
+        Random random = new Random();
+
+        int LevelID1 = 16;
+        int LevelID2 = 8;
+        int LevelID3 = 8;
+        int LevelID4 = 8;
+
         public SignInPage()
         {
             InitializeComponent();
         }
 
-        private void SignUp_Click(object sender, RoutedEventArgs e)
+        private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new ApplicationContext())
+            if (PasswordSignIn == PasswordProofSignIn)
             {
-                var users = db.Users.ToList();
+                PasswordSignIn.Password = null;
+                PasswordProofSignIn.Password = null;
+            }
 
-                foreach (Users u in users)
+            else
+            {
+                using (var db = new ApplicationContext())
                 {
-                    if (LoginSignUp.Text == u.Login && PasswordSignUp.Password == u.Password)
+                    for (int i = 0; i < LevelID1; i++)
                     {
-                        //Chat.Text = "TRUE";
+                        UserID = UserID + random.Next(0, 10);
                     }
 
-                    else
+                    UserID = UserID + "-";
+
+                    for (int i = 0; i < LevelID2; i++)
                     {
-                        //Chat.Text = "FALSE";
+                        UserID = UserID + random.Next(0, 10);
                     }
 
+                    UserID = UserID + "-";
+
+                    for (int i = 0; i < LevelID3; i++)
+                    {
+                        UserID = UserID + random.Next(0, 10);
+                    }
+
+                    UserID = UserID + "-";
+
+                    for (int i = 0; i < LevelID4; i++)
+                    {
+                        UserID = UserID + random.Next(0, 10);
+                    }
+
+                    // создаем два объекта User
+                    Users user = new Users { ID = UserID, Nickname = NicknameSignIn.Text, Login = LoginSignIn.Text, Password = PasswordSignIn.Password };
+
+                    // добавляем их в бд
+                    db.Users.Add(user);
+                    db.SaveChanges();
+
+                    PasswordSignIn.Password = null;
+                    PasswordProofSignIn.Password = null;
+                    LoginSignIn.Text = null;
+                    NicknameSignIn.Text = null;
                 }
             }
         }
     }
 }
+    

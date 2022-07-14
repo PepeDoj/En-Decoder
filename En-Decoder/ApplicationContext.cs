@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using En_Decoder;
-using Microsoft.EntityFrameworkCore;
 
-namespace TestDB
+namespace En_Decoder
 {
-    public class ApplicationContext : DbContext
-    { 
+    internal class ApplicationContext : DbContext
+    {
         public DbSet<Users> Users { get; set; } = null!;
 
         public DbSet<ChatRooms> ChatRooms { get; set; } = null!;
@@ -17,11 +16,12 @@ namespace TestDB
         public ApplicationContext()
         {
             //Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP\SQLSERVER;Database=En-DecoderBD;Trusted_Connection=True;");
         }
-    }
+
+    }  
 }
