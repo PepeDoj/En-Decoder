@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.IO;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace En_Decoder
 {
@@ -21,10 +22,9 @@ namespace En_Decoder
     /// </summary>
     public partial class SignUpPage : Page
     {
-        public SignUpPage(string UserLo)
+        public SignUpPage()
         {
-            InitializeComponent();
-            UserLo = 1;
+            InitializeComponent();     
         }
 
         public event EventHandler ButtonClicked;
@@ -38,13 +38,16 @@ namespace En_Decoder
                 {
                     if (LoginSignUp.Text == u.Login && PasswordSignUp.Password == u.Password)
                     {
-
-                      
+                        DataBank.UserLog = u.Nickname;
+                        LoginSignUp.Text = null;
+                        PasswordSignUp.Password = null;
+                        InitializeComponent();                        
                     }
 
                     else
                     {
-                        //Chat.Text = "FALSE";
+                        LoginSignUp.Text = null;
+                        PasswordSignUp.Password = null;
                     }
 
                 }
@@ -53,7 +56,7 @@ namespace En_Decoder
 
         private void SignButton_Click(object sender, RoutedEventArgs e)
         {
- 
+            NavigationService.Navigate(new SignInPage());
         }
     }
 }

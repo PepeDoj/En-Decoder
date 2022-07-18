@@ -21,34 +21,29 @@ namespace En_Decoder
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    { 
+    {
         public DateTime date = new DateTime();
 
-        public string UserLog;
-
-        public void Update()
-        {
-  
-        }
         public MainWindow()
         {
             InitializeComponent();
 
-            Thread.Sleep(1);
-
-        }
-        private void Enter_Click(object sender, RoutedEventArgs e)
-        {
-
+            Binding binding = new Binding();
+            binding.ElementName = DataBank.UserLog;
         }
         private void Open_Click(object sender, RoutedEventArgs e)
         {
-         
+            
+            MainFrame.Content = new SignUpPage();
+            
+            //UserLabel.Content = DataBank.UserLog;
+
         }
 
         private void Chat_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new ChatPage();
+            UserLabel.Content = App.Current.Resources["UserLog"];
         }
     }
 }
