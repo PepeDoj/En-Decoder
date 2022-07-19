@@ -11,11 +11,11 @@
         <StackPanel Margin="0,0,875,0">
             <Button x:Name="Open" Content="Вход" Margin="0,58,0,15" Click="Open_Click"/>
             <Button x:Name="Chat" Content="Button" Margin="0,0,0,15" Click="Chat_Click"/>
-            <Button Content="Button"/>
+            <Button Content="Button"/> 
+            <Label x:Name="UserLabel" Content="{Binding Binding}" Height="39" Width="125"/>
         </StackPanel>
 
         <Frame x:Name="MainFrame" Content="" Margin="125,0,0,0" NavigationUIVisibility="Hidden"/>
-        <Label x:Name="UserLabel" Content="{Binding DataBanr.UserLog}" Margin="223,180,483,189"/>
 
 
     </Grid>

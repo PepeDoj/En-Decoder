@@ -24,7 +24,8 @@ namespace En_Decoder
     {
         public SignUpPage()
         {
-            InitializeComponent();     
+            InitializeComponent(); 
+            
         }
 
         public event EventHandler ButtonClicked;
@@ -33,23 +34,19 @@ namespace En_Decoder
             using (var db = new ApplicationContext())
             {
                 var users = db.Users.ToList();
+                
 
                 foreach (Users u in users)
                 {
                     if (LoginSignUp.Text == u.Login && PasswordSignUp.Password == u.Password)
-                    {
+                    {                        
                         DataBank.UserLog = u.Nickname;
-                        LoginSignUp.Text = null;
-                        PasswordSignUp.Password = null;
-                        InitializeComponent();                        
-                    }
+                        Label1.Content = DataBank.UserLog;
 
-                    else
-                    {
-                        LoginSignUp.Text = null;
-                        PasswordSignUp.Password = null;
-                    }
 
+                        LoginSignUp.Text = null;
+                        PasswordSignUp.Password = null;     
+                    }
                 }
             }         
         }
@@ -57,6 +54,12 @@ namespace En_Decoder
         private void SignButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new SignInPage());
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            DataBank.UserLog = " ";
+            Label1.Content = DataBank.UserLog;
         }
     }
 }

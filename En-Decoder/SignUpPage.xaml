@@ -10,11 +10,13 @@
       Title="SignInPage">
 
     <Grid>
-        
+
         <TextBox x:Name="LoginSignUp" HorizontalAlignment="Center" Margin="0,0,0,25" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button x:Name="SignUp" Content="Button" HorizontalAlignment="Center" Margin="0,225,0,100" VerticalAlignment="Center" Width="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SignUp_Click"/>
         <PasswordBox x:Name="PasswordSignUp" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="0,50,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-        <Button x:Name="SignButton" Content="Button" HorizontalAlignment="Center" Margin="0,357,0,0" VerticalAlignment="Top" Width="120" Click="SignButton_Click"/>
+        <Button x:Name="SignButton" Content="{Binding DataBank.UserLog}" HorizontalAlignment="Center" Margin="0,357,0,0" VerticalAlignment="Top" Width="120" Click="SignButton_Click" Height="28"/>
+        <Button x:Name="Exit" Content="Button" HorizontalAlignment="Left" Margin="724,339,0,0" VerticalAlignment="Top" Click="Exit_Click"/>
+        <Label x:Name="Label1" Content="Label" HorizontalAlignment="Left" Margin="597,91,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace En_Decoder
 {
-    public class DataBank
+    static class DataBank
     {
-        public static string UserLog { get; set; }
+        public static string UserLog = " ";
     }
 }

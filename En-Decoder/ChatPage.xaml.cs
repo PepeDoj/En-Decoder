@@ -29,7 +29,7 @@ namespace En_Decoder
 
         private void Enter_Click(object sender, RoutedEventArgs e)
         {
-            mess = "TEST123 " + DateTime.Now.ToShortTimeString() + ": " + Message.Text + "\r\n";
+            mess = DataBank.UserLog + " " + DateTime.Now.ToShortTimeString() + ": " + Message.Text + "\r\n";
 
             using (var db = new ApplicationContext())
             {
