@@ -22,16 +22,48 @@ namespace En_Decoder
     /// </summary>
     public partial class MainWindow : Window
     {
-        public DateTime date = new DateTime();
+        static string librarypath = @"C:\Users\roman\source\repos\En-Decoder\library.txt";
+        static string symbols = File.ReadAllText(librarypath);
+
+        int LenghtSymbol = 16;
+
+        Random random = new Random();
+
+        string LibraryID = null;
+        string Code = null;
+        string Buf = null;
+        int LibraryLenght = 32;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Binding binding = new Binding();
-            binding.ElementName = DataBank.UserLog;
+            using (var db = new ApplicationContext())
+            {
+                for (int i = 0; i < symbols.Length; i++)
+                {
+                    for (int j = 0; j < LenghtSymbol; j++)
+                    {
+                        Buf = Buf + symbols[random.Next(1, symbols.Length)];
+                    }
+
+                    Code = Code + Buf;
+                    Buf = null;
+
+                }
+
+                for (int i = 0; i < LibraryLenght; i++)
+                {
+                    LibraryID = LibraryID + random.Next(0, 10);
+                }
+
+                CodeLibraries CodeLibrary = new CodeLibraries { LibraryID = LibraryID, Code = Code};
+
+                db.CodeLibraries.Add(CodeLibrary);
+                db.SaveChanges();
+            }
         }
-        private void Open_Click(object sender, RoutedEventArgs e)
+            private void Open_Click(object sender, RoutedEventArgs e)
         {
             
             MainFrame.Content = new SignUpPage();

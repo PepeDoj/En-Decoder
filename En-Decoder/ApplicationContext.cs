@@ -10,8 +10,8 @@ namespace En_Decoder
     internal class ApplicationContext : DbContext
     {
         public DbSet<Users> Users { get; set; } = null!;
-
         public DbSet<ChatRooms> ChatRooms { get; set; } = null!;
+        public DbSet<CodeLibraries> CodeLibraries { get; set; } = null!;
 
         public ApplicationContext()
         {
