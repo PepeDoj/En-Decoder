@@ -35,7 +35,6 @@ namespace En_Decoder
             {
                 var users = db.Users.ToList();
                 
-
                 foreach (Users u in users)
                 {
                     if (LoginSignUp.Text == u.Login && PasswordSignUp.Password == u.Password)

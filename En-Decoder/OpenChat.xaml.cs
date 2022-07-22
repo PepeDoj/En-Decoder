@@ -24,5 +24,25 @@ namespace En_Decoder
         {
             InitializeComponent();
         }
+
+        private void OpenChatButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var chatrooms = db.ChatRooms.ToList();
+
+                foreach (ChatRooms cr in chatrooms)
+                {
+                    if (OpenChatLogin.Text == cr.Login && OpenChatPassword.Password == cr.Password)
+                    {
+                        DataBank.ChatRoom = cr.RoomID;
+
+                        OpenChatLogin.Text = null;
+                        OpenChatPassword.Password = null;
+                    }
+                }
+            }
+
+        }   
     }
 }

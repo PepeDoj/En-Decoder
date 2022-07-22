@@ -12,7 +12,7 @@
         <Button x:Name="Enter" Content="Button" HorizontalAlignment="Left" Margin="677,343,0,0" VerticalAlignment="Top" Height="97" Width="113" RenderTransformOrigin="0.48,0.554" Click="Enter_Click"/>
         <TextBox x:Name="Chat" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="662" Height="328" FontSize="20" AcceptsTab="True" AcceptsReturn="True"/>
         <TextBox x:Name="Message" HorizontalAlignment="Left" Margin="10,392,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="662" Height="48" FontSize="20"/>
-        <Button x:Name="CreateNewChat" Content="Button" HorizontalAlignment="Left" Margin="677,10,0,0" VerticalAlignment="Top" Height="70" Width="113"/>
+        <Button x:Name="CreateNewChat" Content="Button" HorizontalAlignment="Left" Margin="677,10,0,0" VerticalAlignment="Top" Height="70" Width="113" Click="CreateNewChat_Click"/>
 
     </Grid>
 </Page>

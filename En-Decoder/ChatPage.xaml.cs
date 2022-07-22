@@ -25,6 +25,19 @@ namespace En_Decoder
         public ChatPage()
         {
             InitializeComponent();
+
+            using (var db = new ApplicationContext())
+            {
+                var chatRooms = db.ChatRooms.ToList();
+
+                foreach (ChatRooms c in chatRooms)
+                {
+                    if (c.RoomID == DataBank.ChatRoom && DataBank.UserLog != null) 
+                    {
+                        Chat.Text = c.ChatHistory;
+                    }
+                }
+            }
         }
 
         private void Enter_Click(object sender, RoutedEventArgs e)
@@ -37,20 +50,22 @@ namespace En_Decoder
 
                 foreach(ChatRooms c in chatRooms)
                 { 
-                    if(c.CodeID == "123")
+                    if(c.RoomID == DataBank.ChatRoom)
                     {
                         c.ChatHistory += mess;
                         db.SaveChanges();
-                        Chat.Text = null;
                         mess = null;
                         Chat.Text = c.ChatHistory;
                     }
                 }
-
-
             }
 
             Message.Text = null;
+        }
+
+        private void CreateNewChat_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new NewChat());
         }
     }
 }

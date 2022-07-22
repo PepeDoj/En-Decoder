@@ -8,6 +8,7 @@ namespace En_Decoder
 {
     static class DataBank
     {
-        public static string UserLog = " ";
+        public static string UserLog = null;
+        public static string ChatRoom = null; 
     }
 }
